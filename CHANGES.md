@@ -1,8 +1,13 @@
 ### dev
 
-[full changelog](http://github.com/yolk/sum_sum/compare/v0.0.3...master)
+[full changelog](http://github.com/yolk/sum_sum/compare/v0.0.4...master)
+
+### 0.0.4 / 2011-01-27
+
+[full changelog](http://github.com/yolk/sum_sum/compare/v0.0.3...v0.0.4)
 
 * Fixed major bug on #sort!
+* Some pretty_print support
 
 ### 0.0.3 / 2011-01-27
 
