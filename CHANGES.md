@@ -5,6 +5,7 @@
 * Added SumSum#level
 * Some code cleanup
 * Added SumSum##total_share
+* Added some rdoc/yard comments
 
 ### 0.0.4 / 2011-01-27
 
