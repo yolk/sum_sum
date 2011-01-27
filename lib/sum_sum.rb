@@ -24,9 +24,9 @@ class SumSum < Hash
   end
   
   def sort!
-    values.each(&:sort!) unless bottom?
-    to_a.tap do |array|
-      array.reverse!(&:count)
+    return self if bottom?
+    values.each(&:sort!)
+    to_a.sort_by{|it| it[1].count}.reverse.tap do |array|
       clear
       array.each{|k, v| self[k] = v }
     end

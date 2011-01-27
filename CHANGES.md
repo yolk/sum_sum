@@ -2,6 +2,8 @@
 
 [full changelog](http://github.com/yolk/sum_sum/compare/v0.0.3...master)
 
+* Fixed major bug on #sort!
+
 ### 0.0.3 / 2011-01-27
 
 [full changelog](http://github.com/yolk/sum_sum/compare/v0.0.2...v0.0.3)
