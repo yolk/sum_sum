@@ -1,30 +1,21 @@
 class SumSum < Hash
   def initialize(*args)
-    @parent = args.pop if args[-1].is_a?(self.class)
-    @name = args.shift
-    @args = args.compact.dup
-    @count = 0
+    options = args[-1].is_a?(Hash) ? args.pop : {}
+    @key, @parent, @level = options[:key], options[:parent], (options[:level] || 0)
+    @kind_of_children, @args, @count = args[level], args, 0
     super()
   end
   
-  attr_reader :name, :args, :count, :parent, :level
+  attr_reader :kind_of_children, :key, :args, :count, :parent, :level
   
   def add(hash, increase_by=1)
-    key = hash[name]
     @count = @count + increase_by
     unless bottom?
-      self[key] ||= SumSum.new(*args, self)
+      key = hash[kind_of_children]
+      self[key] ||= SumSum.new(*args, :parent => self, :key => key, :level => level + 1)
       self[key].add(hash, increase_by)
     end
     self
-  end
-  
-  def level
-    @level ||= begin
-      current, level = self, 0
-      level += 1 while current = current.parent
-      level
-    end
   end
   
   def share
@@ -35,22 +26,21 @@ class SumSum < Hash
     return self if bottom?
     values.each(&:sort!)
     to_a.sort_by{|it| it[1].count}.reverse.tap do |array|
-      clear
-      array.each{|k, v| self[k] = v }
+      clear && array.each{|k, v| self[k] = v }
     end
     self
   end
   
   def root?
-    parent.nil?
+    !parent
   end
   
   def bottom?
-    name.nil?
+    !kind_of_children
   end
   
   def inspect
-    bottom? ? "#{count}" : "{#{name}:#{count} #{super.gsub(/^\{|\}$/, "")}}"
+    bottom? ? "#{count}" : "{#{kind_of_children}:#{count} #{super.gsub(/^\{|\}$/, "")}}"
   end
   
   def pretty_print(pp)
@@ -62,7 +52,7 @@ class SumSum < Hash
     return count if bottom?
     hash = {}
     each{ |k, v| hash[k] = v.dump }
-    root? ? [all_args, hash] : hash
+    root? ? [args, hash] : hash
   end
   
   def self.load(data)
@@ -71,18 +61,12 @@ class SumSum < Hash
     end
   end
   
-  def add_from_dump(data, hash={}, level=0)
-    data.each do |key, value|
-      hash[all_args[level]] = key
-      value.is_a?(Hash) ?
-        add_from_dump(value, hash, level + 1) :
-        add(hash, value)
+  def add_from_dump(data, hash={}, on_level=0)
+    data.each do |k, v|
+      hash[args[on_level]] = k
+      v.is_a?(Hash) ?
+        add_from_dump(v, hash, on_level + 1) :
+        add(hash, v)
     end
-  end
-  
-  private
-  
-  def all_args
-    [name] + args
   end
 end

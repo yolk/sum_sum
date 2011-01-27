@@ -3,6 +3,7 @@
 [full changelog](http://github.com/yolk/sum_sum/compare/v0.0.4...master)
 
 * Added SumSum#level
+* Some code cleanup
 
 ### 0.0.4 / 2011-01-27
 
