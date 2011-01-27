@@ -45,6 +45,11 @@ class SumSum < Hash
     bottom? ? "#{count}" : "{#{name}:#{count} #{super.gsub(/^\{|\}$/, "")}}"
   end
   
+  def pretty_print(pp)
+    return pp.text(" #{count}") if bottom?
+    super
+  end
+  
   def dump
     return count if bottom?
     hash = {}
