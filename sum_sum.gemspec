@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["TODO: Write your name"]
   s.email       = ["TODO: Write your email address"]
   s.homepage    = "http://rubygems.org/gems/sum_sum"
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{SumSum allows you to generate simple reports on the count of values in hashes.}
+  s.description = %q{SumSum allows you to generate simple reports on the count of values in hashes.}
 
   s.rubyforge_project = "sum_sum"
 
