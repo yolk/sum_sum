@@ -40,6 +40,20 @@ describe SumSum do
           sum[:Browser][:Firefox]["3.6.0"].keys.should eql([])
         end
       end
+      
+      context "#dump" do
+        it "should output serializable array" do
+          sum.dump.should eql(
+            [[:type, :name, :version], {:Browser=>{:Firefox=>{"3.6.0"=>1}}}]
+          )
+        end
+      end
+      
+      context ".load" do
+        it "should restore everything from serializable array" do
+          SumSum.load(sum.dump).dump.should eql(sum.dump)
+        end
+      end
     end
     
     context "adding multiple hashes" do
@@ -140,6 +154,29 @@ describe SumSum do
           sum[:Browser][:Firefox].share.should eql(0.25)
         end
       end
+    
+      context "#dump" do
+        it "should output serializable array" do
+          sum.dump.should eql(
+            [[:type, :name, :version], {
+              :Crawler=>{:GoogleBot=>{"2.0"=>1}}, 
+              :Browser=>{
+                :Firefox=>{"3.6.0"=>1}, 
+                :Safari=>{"4.0"=>1, "5.0"=>2}
+              }
+            }]
+          )
+        end
+      end
+      
+      context ".load" do
+        it "should restore everything from serializable array" do
+          SumSum.load(sum.dump).dump.should eql(sum.dump)
+        end
+      end
+      
     end
+  
+    
   end
 end

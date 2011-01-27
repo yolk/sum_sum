@@ -44,4 +44,32 @@ class SumSum < Hash
   def inspect
     bottom? ? "#{count}" : "{#{name}:#{count} #{super.gsub(/^\{|\}$/, "")}}"
   end
+  
+  def dump
+    return count if bottom?
+    hash = {}
+    each{ |k, v| hash[k] = v.dump }
+    root? ? [all_args, hash] : hash
+  end
+  
+  def self.load(data)
+    new(*data[0]).tap do |sum_sum|
+      sum_sum.add_from_dump(data[1])
+    end
+  end
+  
+  def add_from_dump(data, hash={}, level=0)
+    data.each do |key, value|
+      hash[all_args[level]] = key
+      value.is_a?(Hash) ?
+        add_from_dump(value, hash, level + 1) :
+        add(hash, value)
+    end
+  end
+  
+  private
+  
+  def all_args
+    [name] + args
+  end
 end
