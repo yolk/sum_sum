@@ -53,6 +53,18 @@ describe SumSum do
         SumSum.load(sum.dump).dump.should eql(sum.dump)
       end
     end
+  
+    context "#level" do
+      it "should return 0 on root" do
+        sum.level.should eql(0)
+      end
+      
+      it "should return correct level on children" do
+        sum[:Browser].level.should eql(1)
+        sum[:Browser][:Firefox].level.should eql(2)
+        sum[:Browser][:Firefox]["3.6.0"].level.should eql(3)
+      end
+    end
   end
   
   context "adding multiple hashes" do

@@ -7,7 +7,7 @@ class SumSum < Hash
     super()
   end
   
-  attr_reader :name, :args, :count, :parent
+  attr_reader :name, :args, :count, :parent, :level
   
   def add(hash, increase_by=1)
     key = hash[name]
@@ -17,6 +17,14 @@ class SumSum < Hash
       self[key].add(hash, increase_by)
     end
     self
+  end
+  
+  def level
+    @level ||= begin
+      current, level = self, 0
+      level += 1 while current = current.parent
+      level
+    end
   end
   
   def share

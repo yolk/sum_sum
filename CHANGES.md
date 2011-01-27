@@ -2,6 +2,8 @@
 
 [full changelog](http://github.com/yolk/sum_sum/compare/v0.0.4...master)
 
+* Added SumSum#level
+
 ### 0.0.4 / 2011-01-27
 
 [full changelog](http://github.com/yolk/sum_sum/compare/v0.0.3...v0.0.4)
