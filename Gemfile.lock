@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sum_sum (0.0.3)
+    sum_sum (0.0.4)
 
 GEM
   remote: http://rubygems.org/
