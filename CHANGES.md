@@ -4,6 +4,7 @@
 
 * Added SumSum#level
 * Some code cleanup
+* Added SumSum##total_share
 
 ### 0.0.4 / 2011-01-27
 

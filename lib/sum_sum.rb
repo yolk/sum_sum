@@ -5,9 +5,9 @@ class SumSum < Hash
     @kind_of_children, @args, @count = args[level], args, 0
     super()
   end
-  
+
   attr_reader :kind_of_children, :key, :args, :count, :parent, :level
-  
+
   def add(hash, increase_by=1)
     @count = @count + increase_by
     unless bottom?
@@ -17,11 +17,15 @@ class SumSum < Hash
     end
     self
   end
-  
+
   def share
     root? ? 1.0 : count/parent.count.to_f
   end
-  
+
+  def total_share
+    count/root.count.to_f
+  end
+
   def sort!
     return self if bottom?
     values.each(&:sort!)
@@ -30,37 +34,41 @@ class SumSum < Hash
     end
     self
   end
-  
+
   def root?
     !parent
   end
-  
+
   def bottom?
     !kind_of_children
   end
-  
+
+  def root
+    root? ? self : parent.root
+  end
+
   def inspect
     bottom? ? "#{count}" : "{#{kind_of_children}:#{count} #{super.gsub(/^\{|\}$/, "")}}"
   end
-  
+
   def pretty_print(pp)
     return pp.text(" #{count}") if bottom?
     super
   end
-  
+
   def dump
     return count if bottom?
     hash = {}
     each{ |k, v| hash[k] = v.dump }
     root? ? [args, hash] : hash
   end
-  
+
   def self.load(data)
     new(*data[0]).tap do |sum_sum|
       sum_sum.add_from_dump(data[1])
     end
   end
-  
+
   def add_from_dump(data, hash={}, on_level=0)
     data.each do |k, v|
       hash[args[on_level]] = k
@@ -69,4 +77,5 @@ class SumSum < Hash
         add(hash, v)
     end
   end
+
 end

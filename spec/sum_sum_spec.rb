@@ -167,6 +167,28 @@ describe SumSum do
         sum[:Browser][:Firefox].share.should eql(0.25)
       end
     end
+    
+    context "#total_share" do
+      it "should return 1.0 on root" do
+        sum.total_share.should eql(1.0)
+      end
+      
+      it "should return 0.2 on branch with one out of five" do
+        sum[:Crawler].total_share.should eql(0.2)
+      end
+      
+      it "should return 0.2 on branch with one out of five deeper in single" do
+        sum[:Crawler][:GoogleBot].total_share.should eql(0.2)
+      end
+      
+      it "should return 0.8 on branch with four out of five" do
+        sum[:Browser].total_share.should eql(0.8)
+      end
+      
+      it "should return 0.2 deeper in branch with one out of five" do
+        sum[:Browser][:Firefox].total_share.should eql(0.2)
+      end
+    end
   
     context "#dump" do
       it "should output serializable array" do
