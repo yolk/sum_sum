@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = "sum_sum"
   s.version     = SumSum::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Sebastian Munz"]
+  s.email       = ["sebastian@yo.lk"]
   s.homepage    = "http://rubygems.org/gems/sum_sum"
   s.summary     = %q{SumSum allows you to generate simple reports on the count of values in hashes.}
   s.description = %q{SumSum allows you to generate simple reports on the count of values in hashes.}
