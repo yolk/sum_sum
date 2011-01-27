@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Sebastian Munz"]
   s.email       = ["sebastian@yo.lk"]
-  s.homepage    = "http://rubygems.org/gems/sum_sum"
+  s.homepage    = "https://github.com/yolk/sum_sum"
   s.summary     = %q{SumSum allows you to generate simple reports on the count of values in hashes.}
   s.description = %q{SumSum allows you to generate simple reports on the count of values in hashes.}
 
